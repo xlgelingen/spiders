@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.4.min.js';
+        document.head.appendChild(script);
+        script.onload = function () {
+            console.log('jQuery 已加载');
+        };
+
+        //立邦：
+        var colorArr = [];
+        var list = $('body');
+        var colorbox = list.find(".filter__list__ele__bg-other");
+        for (let i = 0; i < colorbox.length; i++) {
+            let color = colorbox.eq(i);
+            let colorString = color.css("background-color");
+            var colorValue = colorString.match(/\d+/g);
+            let colorName = color.text();
+            colorValue.unshift(colorName);
+            colorValue.unshift("乳胶漆");
+            colorValue.unshift("立邦");
+            colorArr.push(colorValue);
+        }
+        console.log(colorArr, colorArr[0]);
+
+        $.ajax({
+            url: 'http://localhost:3000/color',
+            data: { colorArr: JSON.stringify(colorArr) },
+            type: 'POST',
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log(data)
+                } else {
+                    console.log(data)
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+        //佐敦
+        var colorArr = [];
+        var listArr = $('.krhMIT');
+        for (let i = 0; i < listArr.length; i++) {
+            var list = listArr.eq(i);
+            var colorbox = list.find(".ColourGridstyles__ColourBlock-sc-15im0b6-3");
+            for (let j = 0; j < colorbox.length; j++) {
+                let color = colorbox.eq(j);
+                let colorString = color.css("background-color");
+                var colorValue = colorString.match(/\d+/g);
+                let colorName = color.children("span").text();
+                colorValue.unshift(colorName);
+                colorValue.unshift("Interior Colour");
+                colorValue.unshift("佐敦");
+                colorArr.push(colorValue);
+            }
+        }
+        console.log(colorArr);
+        //新建html:
+        var list = document.getElementById('color-list').textContent;
+        let colorArr = JSON.parse(list);
+        console.log(colorArr, colorArr[0]);
+
+        $.ajax({
+            url: 'http://localhost:3000/color',
+            data: { colorArr: JSON.stringify(colorArr) },
+            type: 'POST',
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log(data)
+                } else {
+                    console.log(data)
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+        //多乐士
+        var script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.4.min.js';
+        document.head.appendChild(script);
+        script.onload = function () {
+            console.log('jQuery 已加载');
+        };
+        var colorArr = [];
+        var colorBox = $('.color-card');
+        for (let i = 0; i < colorBox.length; i++) {
+            let color = colorBox.eq(i);
+            let colorString = color.css("background-color");
+            var colorValue = colorString.match(/\d+/g);
+            let colorName = color.children("span").text().trim();
+            colorValue.unshift(colorName);
+            colorValue.unshift("color");
+            colorValue.unshift("多乐士");
+            colorArr.push(colorValue);
+
+        }
+        console.log(colorArr, colorArr[0]);
+
+        $.ajax({
+            url: 'http://localhost:3000/color',
+            data: { colorArr: JSON.stringify(colorArr) },
+            type: 'POST',
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log(data)
+                } else {
+                    console.log(data)
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+        //麦兰德
+        var script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.4.min.js';
+        document.head.appendChild(script);
+        script.onload = function () {
+            console.log('jQuery 已加载');
+        };
+
+        var colorArr = [];
+        var colorBox = $('.product .prodcut-list li .pic-box .pic2');
+
+        // 定义一个函数用于加载图片
+        function loadImage(imgSrc, colorName) {
+            return new Promise((resolve, reject) => {
+                var img = new Image();
+                img.src = imgSrc;
+                img.onload = function () {
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    var canvasData = ctx.getImageData(0, 0, 1, 1).data;
+                    var red = canvasData[0];
+                    var green = canvasData[1];
+                    var blue = canvasData[2];
+                    resolve(["麦兰德", "色彩与产品", colorName, red, green, blue]);
+                };
+                img.onerror = function () {
+                    reject(new Error("图片加载失败"));
+                };
+            });
+        }
+
+        var promises = [];
+        for (let i = 0; i < colorBox.length; i++) {
+            let colorImg = colorBox.eq(i).children('img');
+            let colorName = colorBox.eq(i).attr('title');
+            var imgSrc = colorImg.attr('src');
+            promises.push(loadImage(imgSrc, colorName));
+        }
+        // 使用 Promise.all 等待所有图片加载完成
+        Promise.all(promises)
+            .then(results => {
+                colorArr = results;
+                console.log('完成', colorArr);
+            })
+            .catch(error => {
+                console.error('发生错误：', error);
+            });
+
+        // //使用 Promise.allSettled 等待所有图片加载完成
+        // Promise.allSettled(promises)
+        //     .then(results => {
+        //         results.forEach(result => {
+        //             if (result.status === 'fulfilled') {
+        //                 colorArr.push(result.value);
+        //             } else {
+        //                 console.error('发生错误：', result.reason);
+        //             }
+        //         });
+        //         console.log('完成', colorArr);
+        //     });
+
+        $.ajax({
+            url: 'http://localhost:3000/color',
+            data: { colorArr: JSON.stringify(colorArr) },
+            type: 'POST',
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log(data)
+                } else {
+                    console.log(data)
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+    </script>
+</body>
+
+</html>

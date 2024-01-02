@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+}
+
+body {
+  padding: 50px 20px 20px 20px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-start; */
+  margin-bottom: 15px;
+}
+
+.swatch-name {
+  font-size: 16;
+  font-weight: 600;
+}
+
+.brand-name{
+  padding: 4px 10px;
+  margin: 0 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.brand-name.active{
+  border: none;
+  font-weight: 600;
+  background-color: rgb(52, 222, 52);
+}
+
+.brand-name:not(.active):hover{
+  background-color: rgb(218, 246, 218);
+}
+
+.color-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color-item {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 5px;
+  
+}
