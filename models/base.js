@@ -1,4 +1,6 @@
-const knex = require('./knex')
+// const knex = require('./knex')
+const config = require('./../knexfile.js');
+const knex = require('knex')(config);
 class Base {
   constructor(props) {
     this.table = props;

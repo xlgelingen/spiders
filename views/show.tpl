@@ -10,18 +10,26 @@
 <div class="page">
    <div class="page-header" id="brand-list">
         <span class="swatch-name">色卡</span>
+        <a class="brand-name" id="brand-all" href="http://localhost:3000/colors">全部</a>
+        <a class="brand-name" id="brand-joTun" href="http://localhost:3000/colors?brand_name=joTun">JOTUN佐敦</a>
+        <a class="brand-name" id="brand-doLux" href="http://localhost:3000/colors?brand_name=doLux">DOLUX多乐士</a>
+        <a class="brand-name" id="brand-liBang" href="http://localhost:3000/colors?brand_name=liBang">立邦</a>
+        <a class="brand-name" id="brand-myLands" href="http://localhost:3000/colors?brand_name=myLands">MYLANDS麦兰德</a>
+        
+        <!-- 
         <div class="brand-name active" id="brand-all">全部</div>
-        <div class="brand-name" id="li-bang">立邦</div>
-        <div class="brand-name" id="jotun">JOTUN佐敦</div>
-        <div class="brand-name" id="dolux">DOLUX多乐士</div>
-        <div class="brand-name" id="mylands">MYLANDS麦兰德</div>
+        <div class="brand-name" id="brand-joTun">JOTUN佐敦</div>
+        <div class="brand-name" id="brand-doLux">DOLUX多乐士</div>
+        <div class="brand-name" id="brand-liBang">立邦</div>
+        <div class="brand-name" id="brand-myLands">MYLANDS麦兰德</div> -->
     </div>
     <div class="page-body">
         <div class="color-list">
             {% for color in colors %}
-            <div class="color-item" style="background-color: rgb({{color.rgb_r}},{{color.rgb_g}},{{color.rgb_b}});"></div>
+            <div class="color-item {{brand}}" style="background-color: rgb({{color.rgb_r}},{{color.rgb_g}},{{color.rgb_b}});"></div>
             {% endfor %}
-         </div>
+        </div>
+        <div id="{{brand}}" style="display: none;"></div>
     </div>
 </div>
 {% endblock %}

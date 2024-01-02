@@ -2,8 +2,30 @@ const ColorModel = require('../models/color');
 const Color = new ColorModel();
 const color = {
     show: async function (req, res, next) {
+        var brand =req.query.brand_name || null;
+        let colors = '';
         try {
-            var colors = await Color.all();
+            if(brand){
+                switch (brand) {
+                    case "liBang":
+                        brandName = "立邦";
+                        break;
+                    case "joTun":
+                        brandName = "佐敦";
+                        break;
+                    case "doLux":
+                        brandName = "多乐士";
+                        break;
+                    case "myLands":
+                        brandName = "麦兰德";
+                        break;
+                }
+                colors = await Color.select(brandName);
+                res.locals.brand = brand;
+            }else{
+                colors = await Color.all();
+                res.locals.brand = "all";
+            }
             res.locals.colors = colors;
             res.render('show', res.locals);
         } catch (e) {
@@ -30,11 +52,8 @@ const color = {
     },
     selectData: async function (req, res, next) {
         var brand = req.body.brandName;
-        // res.locals.colors = '';
         try {
             const colors = await Color.select(brand);
-            // res.locals.colors = colors;
-            // res.render('show', res.locals);
             res.json({ code: 200, data: colors });
         } catch (e) {
             res.json({ code: 0, data: e })

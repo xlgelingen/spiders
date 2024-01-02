@@ -1,33 +1,30 @@
-
+/* 
 const PAGE = {
-    data: {
-        isActive: false
-    },
     init: function () {
         PAGE.bind();
     },
     bind: function () {
         $('#brand-all').on('click', this.showAll);
-        $('#li-bang').on('click', this.goPage);
-        $('#jotun').on('click', this.goPage);
-        $('#dolux').on('click', this.goPage);
-        $('#mylands').on('click', this.goPage);
+        $('#brand-liBang').on('click', this.goPage);
+        $('#brand-joTun').on('click', this.goPage);
+        $('#brand-doLux').on('click', this.goPage);
+        $('#brand-myLands').on('click', this.goPage);
     },
 
     goPage: function (e) {
         var brand = e.target.id;
         var brandName = '';
         switch (brand) {
-            case "li-bang":
+            case "brand-liBang":
                 brandName = "立邦";
                 break;
-            case "jotun":
+            case "brand-joTun":
                 brandName = "佐敦";
                 break;
-            case "dolux":
+            case "brand-doLux":
                 brandName = "多乐士";
                 break;
-            case "mylands":
+            case "brand-myLands":
                 brandName = "麦兰德";
                 break;
             default:
@@ -74,6 +71,34 @@ const PAGE = {
 }
 
 PAGE.init();
-
-
-
+ */
+var liBang = document.getElementById('liBang');
+var joTun = document.getElementById('joTun');
+var doLux = document.getElementById('doLux');
+var myLands = document.getElementById('myLands');
+var all = document.getElementById('all');
+if (liBang) {
+    var colors = $('.brand-name');
+    colors.removeClass('active');
+    $('#brand-liBang').addClass('active');
+}
+if (joTun) {
+    var colors = $('.brand-name');
+    colors.removeClass('active');
+    $('#brand-joTun').addClass('active');
+}
+if (doLux) {
+    var colors = $('.brand-name');
+    colors.removeClass('active');
+    $('#brand-doLux').addClass('active');
+}
+if (myLands) {
+    var colors = $('.brand-name');
+    colors.removeClass('active');
+    $('#brand-myLands').addClass('active');
+}
+if (all) {
+    var colors = $('.brand-name');
+    colors.removeClass('active');
+    $('#brand-all').addClass('active');
+}
