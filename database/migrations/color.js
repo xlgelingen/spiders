@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema
-        .createTable('color', function (table) {
+        .createTable('colors', function (table) {
             table.increments('id');
             table.string('brand_name', 255);
             table.string('cat', 255);
@@ -13,7 +13,7 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
-        .dropTable("color")
+        .dropTable("colors")
 };
 
 exports.config = { transaction: false };
