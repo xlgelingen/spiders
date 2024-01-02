@@ -30,7 +30,7 @@ const color = {
     },
     selectData: async function (req, res, next) {
         var brand = req.body.brandName;
-        res.locals.colors = '';
+        // res.locals.colors = '';
         try {
             const colors = await Color.select(brand);
             // res.locals.colors = colors;
